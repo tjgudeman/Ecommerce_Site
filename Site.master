@@ -1,0 +1,124 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+
+    <link rel="stylesheet" type="text/css" href="jquery-ui-1.12.1/jquery-ui.theme.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    <!-- Import for looper -->
+   <link rel="stylesheet" href="jquery-ui-1.12.1/looper/src/looper.css">
+    <script src="jquery-ui-1.12.1/looper/src/looper.js"></script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Raider Trade</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="~/raiderTradeIcon.ico" rel="shortcut icon" type="image/x-icon" />
+
+      
+    <!-- Alows other pages to import specific css and js files -->
+    <asp:ContentPlaceHolder ID="HeaderContent" runat="server">
+     </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form runat="server">
+        
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" runat="server" href="~/">Raider Trade</a>
+                    </div>
+                 
+
+                    <div class="navbar-collapse collapse" id="menu-1">
+                        <ul class="nav navbar-nav">
+                            <li><a runat="server" href="~">Home</a></li>
+                            <li><a runat="server" href="~/Catagories">Categories</a></li>
+                            <li><a runat="server" href="~/About">About</a></li>
+                            <li><a runat="server" href="~/Contact">Contact</a></li>
+                            <li><a runat="server" href="~/Cart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                        </ul>
+                        <asp:LoginView runat="server" ViewStateMode="Disabled">
+                            <AnonymousTemplate>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <%--<li><asp:Button ID="CartButton" runat="server" Text="View Cart" onclick="CartButton_Click" /></li>--%>
+                                    <li><a runat="server" href="~/Account/Register">Register</a></li>
+                                    <li><a runat="server" href="~/Account/Login">Log in</a></li>
+                                </ul>
+                            </AnonymousTemplate>
+                            <LoggedInTemplate>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %>!</a></li>
+                                    <li>
+                                        <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                    </li>
+                                </ul>
+                            </LoggedInTemplate>
+                        </asp:LoginView>
+                    </div>
+                </div>
+            </div>
+            <div class="container body-content">
+                <div style ="background-color:#535353">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+                </div>
+                <hr />
+            </div>
+            <div class="footer">
+                <footer>
+                    <a href= "mailto:ThisIsAFakeAddress@RaiderTraide.com? Subject:Contact" target="_top">
+                        <img src="Images/email.png" alt="Email Icon" style="width: 3em; height: 3em;" />
+                    </a>
+                    <a href="https://www.facebook.com/raider.trader.9">
+                        <img src="Images/fb.png" alt="Facebook Icon" style="width: 3em; height: 3em;" />
+                    </a>
+                    <a href="https://plus.google.com/">
+                        <img src="Images/g_plus.png" alt="GooglePlus Icon" style="width: 3em; height: 3em;" />
+                    </a>
+                    <a href="https://www.instagram.com/?hl=en">
+                        <img src="Images/ig.png" alt="IG Icon" style="width: 3em; height: 3em;" />
+                    </a>
+                    <a href="https://twitter.com/?lang=en">
+                        <img src="Images/twitter.png" alt="Twitter Icon" style="width: 3em; height: 3em;" />
+                    </a>
+                    <p>&copy; <%: DateTime.Now.Year %> - Tung, TJ, Ashton and Austin project.</p>
+                </footer>
+            </div>
+
+    </form>
+</body>
+
+    <script>
+        $('.looper').looper({
+            interval: 3000
+        });
+
+        jQuery(function ($) {
+            $('#bulletLooper').on('shown', function (e) {
+                $('.looper-nav > li', this)
+                        .removeClass('active')
+                        .eq(e.relatedIndex)
+                            .addClass('active');
+            });
+        });
+
+    
+</script>
+
+
+
+</html>
